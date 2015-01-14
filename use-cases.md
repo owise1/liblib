@@ -4,19 +4,19 @@
 
 ![cloud-sync](assets/cloud-sync.jpg "Cloud Sync")
 
-A desktop PC user navigates to a remote peoples-lib via URL.  The visitor is able to view, search, consume and sync any files in the remote library.  Synced files are stored in the browser for offline use. They can also be downloaded to the PC file system.  The visitor is able to see other visitors currently in the library and sync with them peer-to-peer using webRTC.
+A desktop PC user navigates to a remote liblib via URL.  The visitor is able to view, search, consume and sync any files in the remote library.  Synced files are stored in the browser for offline use. They can also be downloaded to the PC file system.  The visitor is able to see other visitors currently in the library and sync with them peer-to-peer using webRTC.
 
 ## Guerilla Public Libraries
 
 ![public-library](assets/public-library.jpg "Guerilla Public Library")
 
-A raspberry pi or openWRT router running The People's Library is plugged into an out-of-the-way outlet inside a physical public library (or cafe, supermarket, park...).  The device appears as an open wireless access point that allows all connected to view, search, consume and sync (in either direction, creating a free & local space for public exchange).
+A raspberry pi or openWRT router running liblib is plugged into an out-of-the-way outlet inside a physical public library (or cafe, supermarket, park...).  The device appears as an open wireless access point that allows all connected to view, search, consume and sync (in either direction, creating a free & local space for public exchange).
 
 ## Seamless Sharing
 
 ![protest](assets/protest.jpg "Seamless Sharing")
 
-Two devices containing The People's Library could locate each other and sync automatically.  A Protest organizer might create a library with relevant literature & propaganda allowing protestors to set their libraries to openly sync.
+Two devices containing liblib could locate each other and sync automatically.  A Protest organizer might create a library with relevant literature & propaganda allowing protestors to set their libraries to openly sync.
 
 ## Private Collections
 
