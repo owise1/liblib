@@ -1,7 +1,7 @@
 {
   "name": "liblib",
-  "version": "0.0.1",
-  "description": "Lib Lib is a specification for a \"media\" server built on [couchDB](http://couchdb.apache.org/). \"Media\" is in quotes because the term is being used as loosely as possible (traditional digital items like books, music, video, as well as photos, digital artwork, event archives... really any digital \"stuff\" you want to keep).",
+  "version": "0.0.2",
+  "description": "the liberated library",
   "main": "liblibd/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
