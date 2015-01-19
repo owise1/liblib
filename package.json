@@ -1,0 +1,26 @@
+{
+  "name": "liblib",
+  "version": "0.0.1",
+  "description": "Lib Lib is a specification for a \"media\" server built on [couchDB](http://couchdb.apache.org/). \"Media\" is in quotes because the term is being used as loosely as possible (traditional digital items like books, music, video, as well as photos, digital artwork, event archives... really any digital \"stuff\" you want to keep).",
+  "main": "liblibd/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node liblibd/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/owise1/liblib.git"
+  },
+  "author": "@owise1",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/owise1/liblib/issues"
+  },
+  "homepage": "https://github.com/owise1/liblib",
+  "dependencies": {
+    "bouncy": "^3.2.2",
+    "forever": "^0.13.0",
+    "nano": "^6.0.2",
+    "ramda": "^0.8.0"
+  }
+}
