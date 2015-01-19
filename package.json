@@ -19,7 +19,6 @@
   "homepage": "https://github.com/owise1/liblib",
   "dependencies": {
     "bouncy": "^3.2.2",
-    "forever": "^0.13.0",
     "nano": "^6.0.2",
     "ramda": "^0.8.0"
   }

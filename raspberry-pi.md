@@ -20,3 +20,10 @@ sudo dpkg -i node_latest_armhf.deb
     1. `sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 3000`
     2. `sudo bash -c 'iptables-save > /etc/network/iptables'`
     3. And add this to the end of /etc/network/interfaces `pre-up iptables-restore < /etc/network/iptables`
+* Install liblib daemon
+```
+sudo npm install -g forever
+npm install liblib
+cd node_modules/liblib
+forever start liblibd/index.js
+```
