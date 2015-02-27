@@ -1,4 +1,3 @@
-
 var bouncy = require('bouncy');
 var db     = require('./db.js');
 var config = require('./config.js');

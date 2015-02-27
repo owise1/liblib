@@ -11,6 +11,7 @@
     2. Add `address=/#/192.168.42.1`
     3. Change `#interface=eth0` to `interface=wlan0`
     4. `sudo service dnsmasq restart`
+* make sure ifplugd doesn't mess things up [link](http://sirlagz.net/2013/02/10/how-to-use-the-raspberry-pi-as-a-wireless-access-pointrouter-part-3b/)
 * [Install NodeJs](http://weworkweplay.com/play/raspberry-pi-nodejs/)
 ```
 wget http://node-arm.herokuapp.com/node_latest_armhf.deb 
@@ -22,8 +23,13 @@ sudo dpkg -i node_latest_armhf.deb
     3. And add this to the end of /etc/network/interfaces `pre-up iptables-restore < /etc/network/iptables`
 * Install liblib daemon
 ```
-sudo npm install -g forever
+sudo npm install -g forever bower gulp
 npm install liblib
-cd node_modules/liblib
-forever start liblibd/index.js
+forever start node_modules/liblib/liblibd/index.js
+```
+* Run deamon on boot by adding `su pi -c 'forever start --uid liblibd -a /home/pi/node_modules/liblib/liblibd/index.js < /dev/null &'` to /etc/rc.local
+* You'll probably want couchapp
+```
+sudo apt-get install python python-pip python-dev
+sudo pip install couchapp
 ```
