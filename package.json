@@ -1,6 +1,6 @@
 {
   "name": "liblib",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "the liberated library",
   "main": "liblibd/index.js",
   "scripts": {
