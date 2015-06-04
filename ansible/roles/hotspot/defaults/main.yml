@@ -1,0 +1,3 @@
+# Change these variables invest normal data file to reflect your SSID and passphrase.
+ssid: liblib 
+chipset: rtl871xdrv 

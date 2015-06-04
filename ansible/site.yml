@@ -1,0 +1,15 @@
+- hosts: all
+  gather_facts: yes
+  user: pi
+  sudo: yes
+
+  roles:
+     - common
+     - hotspot
+
+  # tasks:
+  # - name: Final greeting upon successful Completion.
+  #   pause: prompt="If you've got this far without any errors everything is probably okay! Press [Enter] to continue."
+  #   - name: rebooting
+  #     sudo: yes
+  #     action: command /sbin/reboot -t now

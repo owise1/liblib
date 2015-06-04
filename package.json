@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/owise1/liblib",
   "dependencies": {
-    "http-proxy": "^1.8.1"
+    "http-proxy": "^1.8.1",
     "nano": "^6.0.2",
     "q": "^1.1.2",
     "ramda": "^0.8.0"

@@ -8,6 +8,10 @@ This project is primarily a specification, however it also contains instructions
 
 Because then you can do all kinds of neat "stuff" with it! When you store your digital stuff in liblib then it becomes a platform for anything you can think of.  Check out the [use cases](docs/use-cases.md)
 
+## In The Wild
+
+* [La Nube Oscura](https://github.com/owise1/kadist-dark-clouds-exhibition) - a mobile video program of contemporary artworks, curated (and carried) by [Joseph del Pesco](http://www.delpesco.com/).
+
 ### How to... 
 
-* [Make your own on a Respberry Pi](docs/raspberry-pi.md)
+* [Make your own on a Raspberry Pi](docs/raspberry-pi.md)

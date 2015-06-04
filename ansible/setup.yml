@@ -1,0 +1,22 @@
+- hosts: all
+  sudo: yes
+  user: pi
+
+  tasks:
+    - name: Creates destination directory on the Pi for our key.
+#      file: state=directory mode=0007 dest=/home/pi/.ssh/
+      file: state=directory dest=/home/pi/.ssh/
+
+    - name: pushes your RSA key to the Raspberry Pi. (Don't worry if this fails)
+#      copy: src=~/.ssh/id_rsa.pub dest=/home/pi/.ssh/authorized_keys owner=pi mode=0007
+      copy: src=~/.ssh/id_rsa.pub dest=/home/pi/.ssh/authorized_keys owner=pi
+      register: rsa
+      ignore_errors: yes
+
+    - name: Pushes your DSA key to the Raspberry Pi.(it's NOT ok if both TASKs fail)
+#      copy: src=~/.ssh/id_dsa.pub dest=/home/pi/pi/.ssh/authorized_keys owner=pi mode=0007
+      copy: src=~/.ssh/id_dsa.pub dest=/home/pi/pi/.ssh/authorized_keys owner=pi
+      when: rsa|failed
+
+    - name: Final greeting upon successful SSH Key push.
+      pause: prompt="1 failure above is okay, if you got this far everything is probably okay. Press [Enter] to continue."w

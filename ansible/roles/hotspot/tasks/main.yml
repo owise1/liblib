@@ -1,0 +1,91 @@
+---
+- name: Install hotspot and DHCP server.
+  apt: pkg={{ item }} state=latest
+  sudo: yes
+  with_items:
+    - isc-dhcp-server
+    - hostapd
+    - dnsmasq 
+
+# If you are using the RTL8188CUS chipset in your Wi-Fi adapter, comment in
+# the following three lines.  (Remove the hash marks at the beginning of each line!)
+
+- name: Workaround for IP address not persisting across reboots.
+  copy: src=hostapd dest=/usr/sbin/hostapd
+  sudo: yes
+
+- name: Copy the new DHCP configurations into place.
+  copy: src=dhcpd.conf dest=/etc/dhcp/dhcpd.conf
+  sudo: yes
+
+- name: Tell DHCP server which interface to use.
+  copy: src=isc-dhcp-server dest=/etc/default/isc-dhcp-server
+  sudo: yes
+
+- name: Update network interface configurations.
+  copy: src=interfaces dest=/etc/network/interfaces
+  sudo: yes
+
+- name: Assign static IP address to wireless interface.
+  shell: ifconfig wlan0 192.168.42.1
+  sudo: yes
+
+- name: Move the hostapd file into place.
+  copy: src=hostapd.conf dest=/etc/hostapd/hostapd.conf
+  sudo: yes
+
+- name: Input our chosen Radio chipset into the hostapd config file.
+  lineinfile: dest=/etc/hostapd/hostapd.conf  regexp=^'driver=' line='driver={{ chipset }}'
+  sudo: yes
+
+- name: Input our chosen SSID into the hostapd config file.
+  lineinfile: dest=/etc/hostapd/hostapd.conf  regexp=^'ssid=' line='ssid={{ ssid }}'
+  sudo: yes
+
+#- name: Input our chosen passphrase into the hostapd config file.
+#  lineinfile: dest=/etc/hostapd/hostapd.conf regexp=^'wpa_passphrase=' line='wpa_passphrase={{ wpa_passphrase }}'
+#  sudo: yes
+
+- name: Point hostapd at the configurations file.
+  lineinfile: dest=/etc/default/hostapd  regexp=^'DAEMON_CONF=""' line='DAEMON_CONF="/etc/hostapd/hostapd.conf"'
+  sudo: yes
+
+#- name: Update NAT settings
+  #shell: echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+  #sudo: yes
+
+#- name: Activate NAT settings immediately.
+  #shell: sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+  #sudo: yes
+
+#- name: move ifplugd  configurations into place
+  #copy: src=ifplugd dest=/etc/default/ifplugd
+  #sudo: yes
+
+#- name: Flush IPTables.
+  #shell: iptables -F
+  #sudo: yes
+
+#- name: Flush NAT routing table.
+  #shell: iptables -t nat -F
+  #sudo: yes
+
+#- name: Copy IPTables config file to the server.
+  #copy: src=iptables.conf dest=/tmp/iptables.conf
+  #sudo: yes
+
+#- name: Import IPTables config.
+  #shell: iptables-restore < /tmp/iptables.conf
+  #sudo: yes
+
+#- name: Save IPTables configuration.
+  #shell: sh -c "iptables-save > /etc/iptables.ipv4.nat"
+  #sudo: yes
+
+- name: Make  hostapdstart at boot.
+  shell: update-rc.d hostapd enable
+  sudo: yes
+
+- name: Make isc-dhcp-server start at boot.
+  shell: update-rc.d isc-dhcp-server enable
+  sudo: yes

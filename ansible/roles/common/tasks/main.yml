@@ -1,0 +1,60 @@
+---
+
+- name: Let's update the apt cache.
+  apt: update_cache=yes cache_valid_time=3600
+  sudo: yes
+
+- name: Now we need to update the Raspbian distribution.
+  apt: upgrade=yes
+  sudo: yes
+
+- name: We are setting our new hostname.
+  hostname: name={{ hostname }}
+
+- name: Make sure some basic tools are installed
+  apt: pkg={{ item }} state=latest
+  sudo: yes
+  with_items:
+    - unattended-upgrades
+    - git
+    - curl
+    - atop
+    - htop
+    - iftop
+    - iotop
+    - nmap
+    - mosh
+    - tmux
+    - zsh
+    - nmon
+    - dstat
+    - iptables
+    - rpi-update
+    - haveged
+
+- name: Couchdb stuff 
+  apt: pkg={{ item }} state=latest
+  sudo: yes
+  with_items:
+    - couchdb
+    - python
+    - python-pip
+    - python-dev
+
+- name: Couchapp
+  sudo: yes
+  pip: name=couchapp
+
+- name: Uninstall the massive wolfram-alpha engine as it's unnecessary for our purposes
+  apt: pkg={{ item }} state=absent
+  sudo: yes
+  with_items:
+    - wolfram-engine
+
+- name: Autoremove any unused packages.
+  shell: "apt-get autoremove --assume-yes --purge"
+  sudo: yes
+
+- name: Let's Autoclean the system.
+  shell: "apt-get autoclean --assume-yes"
+  sudo: yes

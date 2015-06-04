@@ -1,6 +1,11 @@
 # liblib with pi
 
-## Set up your raspberry pi
+## Setting up Raspberry Pi using [Ansible](http://www.ansible.com/)
+* [Flashing Raspian to an SD Card](http://computers.tutsplus.com/articles/how-to-flash-an-sd-card-for-raspberry-pi--mac-53600)
+* Install ansible if you don't already have it
+    * OSX: you may also need to install [sshpass](http://thornelabs.net/2014/02/09/ansible-os-x-mavericks-you-must-install-the-sshpass-program.html)
+
+## Set up your raspberry pi manually
 * [Flashing Raspian to an SD Card](http://computers.tutsplus.com/articles/how-to-flash-an-sd-card-for-raspberry-pi--mac-53600)
 * [Install WAP software and configure](https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point/install-software)
     * This tutorial creates a password protected network. If you want it to be open, leave off the final 5 lines that they suggest for hostapd.conf
@@ -33,3 +38,7 @@ forever start node_modules/liblib/liblibd/index.js
 sudo apt-get install python python-pip python-dev
 sudo pip install couchapp
 ```
+
+### Thankful to
+
+* [escapologyBB](https://github.com/escapologyBB/ansible-raspberry-pi) for the beginnings of the ansible playbook
