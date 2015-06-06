@@ -1,11 +1,24 @@
-# liblib with pi
+# How to setup liblib on a Raspberry Pi
 
-## Setting up Raspberry Pi using [Ansible](http://www.ansible.com/)
-* [Flashing Raspian to an SD Card](http://computers.tutsplus.com/articles/how-to-flash-an-sd-card-for-raspberry-pi--mac-53600)
-* Install ansible if you don't already have it
+## EASIEST -  Using [Ansible](http://www.ansible.com/)
+* [Flash Raspian to an SD Card](http://computers.tutsplus.com/articles/how-to-flash-an-sd-card-for-raspberry-pi--mac-53600)
+* Install [ansible](http://www.ansible.com/) on your own computer (not the pi) if you don't already have it
     * OSX: you may also need to install [sshpass](http://thornelabs.net/2014/02/09/ansible-os-x-mavericks-you-must-install-the-sshpass-program.html)
+* Plug in the pi, go through the setup process, find out its IP address on your local network. (it should print it out at the end of the boot process)
+* On your computer update the IP address in `ansible/hosts` to the pi's IP
+* From the ansible directory run this command to copy your public key to the pi:
+```
+    ansible-playbook -i hosts setup.yml
+```
+* Then run this:
+```
+    ansible-playbook -i hosts site.yml
+```
 
-## Set up your raspberry pi manually
+#### Reboot your pi and that's it! Your liblib is a public hotspot called *liblib* 
+
+
+## NOT AS EASY - Step by step 
 * [Flashing Raspian to an SD Card](http://computers.tutsplus.com/articles/how-to-flash-an-sd-card-for-raspberry-pi--mac-53600)
 * [Install WAP software and configure](https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point/install-software)
     * This tutorial creates a password protected network. If you want it to be open, leave off the final 5 lines that they suggest for hostapd.conf

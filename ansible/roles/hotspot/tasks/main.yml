@@ -7,9 +7,8 @@
     - hostapd
     - dnsmasq 
 
-# If you are using the RTL8188CUS chipset in your Wi-Fi adapter, comment in
-# the following three lines.  (Remove the hash marks at the beginning of each line!)
-
+# If you are not using the RTL8188CUS chipset in your Wi-Fi adapter, comment
+# out the following three lines.  
 - name: Workaround for IP address not persisting across reboots.
   copy: src=hostapd dest=/usr/sbin/hostapd
   sudo: yes
@@ -24,6 +23,10 @@
 
 - name: Update network interface configurations.
   copy: src=interfaces dest=/etc/network/interfaces
+  sudo: yes
+
+- name: Redirect 80 to 3000
+  copy: src=iptables.conf dest=/etc/network/iptables
   sudo: yes
 
 - name: Assign static IP address to wireless interface.
@@ -42,45 +45,43 @@
   lineinfile: dest=/etc/hostapd/hostapd.conf  regexp=^'ssid=' line='ssid={{ ssid }}'
   sudo: yes
 
-#- name: Input our chosen passphrase into the hostapd config file.
-#  lineinfile: dest=/etc/hostapd/hostapd.conf regexp=^'wpa_passphrase=' line='wpa_passphrase={{ wpa_passphrase }}'
-#  sudo: yes
-
 - name: Point hostapd at the configurations file.
   lineinfile: dest=/etc/default/hostapd  regexp=^'DAEMON_CONF=""' line='DAEMON_CONF="/etc/hostapd/hostapd.conf"'
   sudo: yes
 
-#- name: Update NAT settings
-  #shell: echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
-  #sudo: yes
+- name: Do dnsmasq conf
+  copy: src=dnsmasq.conf dest=/etc/dnsmasq.conf
+  sudo: yes
 
-#- name: Activate NAT settings immediately.
-  #shell: sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
-  #sudo: yes
+- name: Restart dnsmasq
+  service: name=dnsmasq state=restarted
+  sudo: yes
 
-#- name: move ifplugd  configurations into place
-  #copy: src=ifplugd dest=/etc/default/ifplugd
-  #sudo: yes
+- name: Get Nodejs
+  get_url: url="http://node-arm.herokuapp.com/node_latest_armhf.deb" dest=/home/pi/node.deb mode=0755
+  sudo: yes
 
-#- name: Flush IPTables.
-  #shell: iptables -F
-  #sudo: yes
+- name: install Nodejs
+  apt: deb=/home/pi/node.deb
+  sudo: yes
 
-#- name: Flush NAT routing table.
-  #shell: iptables -t nat -F
-  #sudo: yes
+- name: Install global npm modules 
+  npm: name={{ item }} state=latest global=yes
+  sudo: yes
+  with_items:
+    - forever 
+    - bower 
+    - gulp 
+  
+- name: Install liblib npm module
+  npm: name=liblib path=/home/pi state=latest
 
-#- name: Copy IPTables config file to the server.
-  #copy: src=iptables.conf dest=/tmp/iptables.conf
-  #sudo: yes
+- name: Start liblib now
+  shell: forever start /home/pi/node_modules/liblib/liblibd/index.js
 
-#- name: Import IPTables config.
-  #shell: iptables-restore < /tmp/iptables.conf
-  #sudo: yes
-
-#- name: Save IPTables configuration.
-  #shell: sh -c "iptables-save > /etc/iptables.ipv4.nat"
-  #sudo: yes
+- name: move ifplugd  configurations into place
+  copy: src=ifplugd dest=/etc/default/ifplugd
+  sudo: yes
 
 - name: Make  hostapdstart at boot.
   shell: update-rc.d hostapd enable
@@ -89,3 +90,6 @@
 - name: Make isc-dhcp-server start at boot.
   shell: update-rc.d isc-dhcp-server enable
   sudo: yes
+
+- name: Run liblib at startup
+  lineinfile: dest=/etc/rc.local line="su pi -c 'forever start --uid liblibd -a /home/pi/node_modules/liblib/liblibd/index.js < /dev/null &'" regexp='^.*liblib.*$' insertbefore="^exit" state=present

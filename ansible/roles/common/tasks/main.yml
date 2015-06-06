@@ -31,6 +31,7 @@
     - iptables
     - rpi-update
     - haveged
+    - avahi-daemon
 
 - name: Couchdb stuff 
   apt: pkg={{ item }} state=latest

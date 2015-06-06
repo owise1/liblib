@@ -1,14 +1,17 @@
-# Lib Lib
+# liblib 
 
-Lib Lib is a "media" server built on [couchDB](http://couchdb.apache.org/). "Media" is in quotes because the term is being used as loosely as possible (traditional digital items like books, music, video, as well as photos, digital artwork, event archives... really any digital "stuff" you want to keep).
+Liblib is a "media" server built on [couchDB](http://couchdb.apache.org/). "Media" is in quotes because the term is being used as loosely as possible (traditional digital items like books, music, video, as well as photos, digital artwork, event archives... really any digital "stuff" you want to keep).  If your "stuff" is on the liblib then anyone can connect to it via wifi and check out what you've got.
 
-This project is primarily a specification, however it also contains instructions on how to create your own and an initial implementation.
+One of the things that is cool about liblib is that it (will) automatically sync with other liblibs. This leads to some pretty neat...
+ 
+### [USE CASES](docs/use-cases.md)
 
-## Why would you want to store your "stuff" in this way?
 
-Because then you can do all kinds of neat "stuff" with it! When you store your digital stuff in liblib then it becomes a platform for anything you can think of.  Check out the [use cases](docs/use-cases.md)
+NOTE: This project is primarily a specification. However it also contains instructions on how to [create your own](docs/raspberry-pi.md) and an initial implementation.
 
 ## In The Wild
+
+![la-nube-oscura](docs/assets/lanubeoscura.jpg)
 
 * [La Nube Oscura](https://github.com/owise1/kadist-dark-clouds-exhibition) - a mobile video program of contemporary artworks, curated (and carried) by [Joseph del Pesco](http://www.delpesco.com/).
 
