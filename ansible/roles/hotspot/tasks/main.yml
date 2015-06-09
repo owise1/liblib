@@ -57,6 +57,14 @@
   service: name=dnsmasq state=restarted
   sudo: yes
 
+- name: Turn off dnsmasq when an ethernet cable is plugged in
+  lineinfile: "dest=/etc/ifplugd/ifplugd.action line='\tservice dnsmasq stop' insertafter='^up' state=present"
+  sudo: yes
+
+- name: Turn on dnsmasq when an ethernet cable is unplugged 
+  lineinfile: "dest=/etc/ifplugd/ifplugd.action line='\tservice dnsmasq start' insertafter='^down' state=present"
+  sudo: yes
+
 - name: Get Nodejs
   get_url: url="http://node-arm.herokuapp.com/node_latest_armhf.deb" dest=/home/pi/node.deb mode=0755
   sudo: yes

@@ -6,7 +6,7 @@
     * OSX: you may also need to install [sshpass](http://thornelabs.net/2014/02/09/ansible-os-x-mavericks-you-must-install-the-sshpass-program.html)
 * Plug in the pi, go through the setup process, find out its IP address on your local network. (it should print it out at the end of the boot process)
 * On your computer update the IP address in `ansible/hosts` to the pi's IP
-* From the ansible directory run this command to copy your public key to the pi:
+* From the `ansible` directory run this command to copy your public key to the pi:
 ```
     ansible-playbook -i hosts setup.yml
 ```
