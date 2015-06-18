@@ -2,18 +2,18 @@
 // @return bool - Is this a captive portal detection request
 
 module.exports = function (req) {
-  var ok = true
+  var ok = false 
 
   function headerTester (headerAttr) {
     return function (regex) {
-      if (regex.test(req.headers[headerAttr])) ok = false
+      if (req.headers[headerAttr] && regex.test(req.headers[headerAttr])) ok = true 
     }
   }
   // user-agents
-  [/CaptiveNetworkSupport/].forEach(headerTester('user-agent'))
+  [/CaptiveNetworkSupport/].forEach(headerTester('user-agent'));
 
   // hosts
-  [/clients3\.google\.com/].forEach(headerTester('host'))
+  [/clients3\.google\.com/].forEach(headerTester('host'));
 
   return ok 
 }
