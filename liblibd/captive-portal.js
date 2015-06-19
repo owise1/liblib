@@ -1,6 +1,5 @@
 // @param httpRequest
 // @return bool - Is this a captive portal detection request
-var R = require('ramda')
 
 module.exports = function (req) {
   var ok = false 
@@ -18,7 +17,15 @@ module.exports = function (req) {
   // hosts
   [
     /clients3\.google\.com/,
-    /captive\.apple\.com/
+    /akamaitechnologies/,
+    /itools\.info/,
+    /ibook\.info/,
+    /airport\.us/,
+    /thinkdifferent\.us/,
+    /akamaiedge/,
+    /msftncsi/,
+    /teredo\.ipv6\.microsoft/,
+    /apple\.com/
   ].forEach(headerTester('host'));
 
   return ok 
