@@ -53,8 +53,8 @@
   copy: src=dnsmasq.conf dest=/etc/dnsmasq.conf
   sudo: yes
 
-- name: Restart dnsmasq
-  service: name=dnsmasq state=restarted
+- name: Stop dnsmasq or it will mess up downloading
+  service: name=dnsmasq state=stopped
   sudo: yes
 
 - name: Turn off dnsmasq when an ethernet cable is plugged in
