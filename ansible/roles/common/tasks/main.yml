@@ -24,6 +24,7 @@
     - iotop
     - nmap
     - mosh
+    - vim 
     - tmux
     - zsh
     - nmon

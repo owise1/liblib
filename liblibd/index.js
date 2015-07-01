@@ -4,7 +4,8 @@ var httpProxy       = require('http-proxy')
 var R               = require('ramda')
 var db              = require('./db.js')
 var config          = require('./config.js')
-var isCaptivePortal = require('./captive-portal.js')
+var isCaptivePortal = require('./lib/captive-portal.js')
+var scanner = require('./lib/scanner.js')
 
 var cfg, dbq
 
@@ -14,9 +15,9 @@ proxy.on('proxyReq', function(proxyReq, req, res, options) {
 
 config
 .then(db.setup)
-.then(function(dbObj){
-  cfg = dbObj.config
-  dbq = dbObj.q
+.then(function(configObj){
+  cfg = configObj.config
+  dbq = configObj.q
 
   /*
    * If a "liblib app" has a rewrite called dialog, then it wants

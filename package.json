@@ -1,6 +1,6 @@
 {
   "name": "liblib",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "the liberated library",
   "main": "liblibd/index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "http-proxy": "^1.8.1",
     "nano": "^6.0.2",
     "q": "^1.1.2",
-    "ramda": "^0.8.0"
+    "ramda": "^0.8.0",
+    "wireless": "^0.3.2"
   }
 }
