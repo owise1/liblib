@@ -1,6 +1,10 @@
 var nano = require('nano');
 var Q    = require('q');
 
+var exp = {
+  setup : setup,
+  nano : nano
+}
 
 function setup(config){
   var d = Q.defer();
@@ -9,7 +13,40 @@ function setup(config){
 
   function fin(){
     design(config)
-    .then(d.resolve);
+    .then(function (cfg) {
+      var theDb = nano.db.use('liblib')
+      var dbq = {
+        view : function(view, params){
+          var d = Q.defer();
+          var design;
+          if(/\//.test(view)){
+            design = view.split('/')[0];
+            view = view.split('/')[1];
+
+          } else {
+            design = designDocName;
+          }
+          theDb.view(design, view, params, function(err, data){
+            if(err){
+              d.reject(err);
+            } else {
+              d.resolve(data);
+            }
+          });
+          return d.promise;
+        },
+        fetch : Q.nbind(theDb.fetch, theDb),
+        insert : Q.nbind(theDb.insert, theDb),
+        list : Q.nbind(theDb.list, theDb),
+        get : Q.nbind(theDb.get, theDb),
+        destroy : Q.nbind(theDb.destroy, theDb)
+      }
+      var ret = {
+        config : cfg,
+        q : dbq 
+      }
+      d.resolve(ret)
+    })
   }
 
   nano.db.get('liblib', function(err, body){
@@ -57,10 +94,6 @@ function design(config){
 }
 
 
-module.exports = {
-  setup : setup,
-  nano : nano
-}
 
-
+module.exports = exp 
 
