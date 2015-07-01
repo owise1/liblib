@@ -9,6 +9,14 @@ One of the things that is cool about liblib is that it (will) automatically sync
 
 NOTE: This project is primarily a specification. However it also contains instructions on how to [create your own](docs/raspberry-pi.md) and an initial implementation.
 
+## What Will it do?
+
+* Become a wireless access point that users can connect to and access the contents via HTTP ✓ 
+* Locate and connect to other liblibs via wifi ✓ (partially)
+* Automatically sync their contents
+
+
+
 ## In The Wild
 
 ![la-nube-oscura](docs/assets/lanubeoscura.jpg)

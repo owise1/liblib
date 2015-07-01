@@ -10,7 +10,8 @@ var config = {
   couchdbPort : couchdbPort,
   liblibdPort : 3000,
   couchdbUrl  : 'http://localhost:' + couchdbPort,
-  dbName      : 'liblib'
+  dbName      : 'liblib',
+  scan        : false    // look for other liblibs
 }
 
 var d = Q.defer();

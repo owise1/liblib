@@ -5,7 +5,6 @@ var R               = require('ramda')
 var db              = require('./db.js')
 var config          = require('./config.js')
 var isCaptivePortal = require('./lib/captive-portal.js')
-var scanner = require('./lib/scanner.js')
 
 var cfg, dbq
 
@@ -15,6 +14,9 @@ proxy.on('proxyReq', function(proxyReq, req, res, options) {
 
 config
 .then(db.setup)
+.then(function (configObj) {
+  return configObj.config.scan ? require('./lib/scanner.js')(configObj) : Q(configObj)
+})
 .then(function(configObj){
   cfg = configObj.config
   dbq = configObj.q
